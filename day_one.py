@@ -57,3 +57,20 @@ for i in elf_list:
         elf_location = current_location
 
 print(f"The elf carrying the most calories is number {elf_location} who is carrying {max_calories}.")
+
+top3 = [0,0,0]
+
+for i in elf_list:
+    y = 0
+    for x in top3:
+        if i > x:
+            top3[y] = i
+            break
+        y += 1
+
+top3_total = 0
+for x in top3:
+    top3_total += x
+
+print(f"The top three elves are carrying {top3[0]}, {top3[1]}, {top3[2]} calories.")
+print(f"This is {top3_total} calories all together.")
