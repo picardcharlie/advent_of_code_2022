@@ -28,7 +28,8 @@ for i in raw_input.read():
     else:
         current_list += i
 
-print(rucksack_list)
+raw_input.close()
+
 # sort those bags brother.  Check to see if the same letter is inside of each compartment.
 # add value to total number.
 total_checks = 0
@@ -39,28 +40,48 @@ priority_values = { "a":1, "b":2, "c":3, "d":4, "e":5, "f":6, "g":7, "h":8, "i":
                     "I":35, "J":36, "K":37, "L":38, "M":39, "N":40, "O":41, "P":42, "Q":43, "R":44, "S":45,
                     "T":46, "U":47, "V":48, "W":49, "X":50, "Y":51, "Z":52 }
 
-test_list = ["JppMDcJPcQbqGqFb", "ZStgnHtsSjGBhqFbBmsm", "djzzwgHHggdnfwjtMPDPMGpPlNfpLDll", "dRCtwtlCSttPtlNPNtgvPrDqmBsjGSpjBBsJsqqmrp","ZhWnZhzMMfnWWTDzBrmsmjsBccJB"]
-for rucksack in rucksack_list[0:(len(rucksack_list)+1)]:
+for rucksack in rucksack_list:
     compartment_one = rucksack[0]
     for item in compartment_one:
         compartment_two = rucksack[1]
         if item in compartment_two:
             total_checks += 1
             current_total += priority_values[item]
-            print(f"{compartment_one} + {compartment_two} + {item} + {total_checks}")
+            #print(f"{compartment_one} + {compartment_two} + {item} + {total_checks}")
             break
 
 
-#        for item2 in compartment_two:
-#            if item == item2:
-#                print(f"{compartment_one} + {compartment_two} + {item} / {item2}")
-#                current_total += priority_values[item]
-#                break
+print(f"Total priority score: {current_total} for item in each rucksack.")
+
+raw_input2 = open("day_three_input.txt", "r")
+
+rucksack_count = 0
+rucksack_badges = []
+current_list = ""
+compartments = []
+for i in raw_input2.read():
+    # if it's a new line and there was just previously a new line,
+    if i == '\n':
+        compartments.append(current_list)
+        rucksack_count += 1
+
+        if rucksack_count == 3:
+            rucksack_badges.append(compartments)
+            compartments = []
+            rucksack_count = 0
+
+        current_list = ""
+
+    else:
+        current_list += i
 
 
-print(f"Total priority score: {current_total}.")
+priority_total2 = 0
+for rucksacks in rucksack_badges:
+    elf1 = rucksacks[0]
+    for item2 in elf1:
+        if item2 in rucksacks[1] and item2 in rucksacks[2]:
+            priority_total2 += priority_values[item2]
+            break
 
-#for rucksack in rucksack_list[:5]:
-#    b = rucksack[1]
-#    for d in b:
-#        print(d)
+print(f"Total priority of the elf's badges: {priority_total2}.")
