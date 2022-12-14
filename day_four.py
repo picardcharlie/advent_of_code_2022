@@ -74,6 +74,25 @@ for pair in all_elf_pairs:
 
 print(total_overlap)
 
+
+
+#part 2: find all pairs that intersect at all.
+single_common = 0
+for pair in all_elf_pairs:
+    elf1 = pair[0]
+    elf2 = pair[1]
+
+    for number in range(elf1[0], elf1[1]+1):
+        if elf2[0] <= number <= elf2[1]:
+            single_common += 1
+            break
+
+
+print(single_common)
+
+
+
+
 '''
 all the code that is too much
 '''
