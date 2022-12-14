@@ -62,36 +62,42 @@ for y in raw_input.read():
     else:
         current_input += y
 
-#print(all_elf_pairs)  # 1 14 quad[14]
 # format = all pairs[ elf_duo[ elf1_range[start,finish], elf2_range[start,finish] ] ]
-
-# pull ranges from list, check against the other range.
 
 total_overlap = 0
 
 for pair in all_elf_pairs:
     elf1 = pair[0]
     elf2 = pair[1]
-    compared_list1 = []
-    compared_list2 = []
-    contained_section = None
-    for section1 in range(elf1[0],(elf1[1])+1):
-        if section1 in range(elf2[0],(elf2[1])+1):
-            compared_list1.append(section1)
-
-    #if compared_list1 == elf1:
-    #    total_overlap += 1
-    #    compared_list1 = []
-
-    for section2 in range(elf2[0], elf2[1]+1):
-        if section2 in range(elf1[0], elf1[1]+1):
-            compared_list2.append(section2)
-
-    if compared_list1 == elf1 or compared_list2 == elf2:
+    if elf1[0] <= elf2[0] <= elf2[1] <= elf1[1] or elf2[0] <= elf1[0] <= elf1[1] <= elf2[1]:
         total_overlap += 1
-        print(compared_list1, compared_list2)
-    compared_list1 = []
-    compared_list2 = []
 
+print(total_overlap)
 
-#print(total_overlap)
+'''
+all the code that is too much
+'''
+
+#    elf1 = pair[0]
+#    elf2 = pair[1]
+#    compared_list1 = []
+#    compared_list2 = []
+#    contained_section = None
+#    for section1 in range(elf1[0],(elf1[1])+1):
+#        if section1 in range(elf2[0],(elf2[1])+1):
+#            compared_list1.append(section1)
+#
+#    #if compared_list1 == elf1:
+#    #    total_overlap += 1
+#    #    compared_list1 = []
+#
+#    for section2 in range(elf2[0], elf2[1]+1):
+#        if section2 in range(elf1[0], elf1[1]+1):
+#            compared_list2.append(section2)
+#
+#    if compared_list1 == elf1 or compared_list2 == elf2:
+#        total_overlap += 1
+#        print(compared_list1, compared_list2)
+#    compared_list1 = []
+#    compared_list2 = []
+
